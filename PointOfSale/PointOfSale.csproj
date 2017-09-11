@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{85CA623E-00DB-4914-943F-158758A5A0E7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PointOfSale</RootNamespace>
+    <AssemblyName>PointOfSale</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\Accounts\AddAccountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Accounts\AddAccountForm.Designer.cs">
+      <DependentUpon>AddAccountForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Invoices\CreateInvoiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Invoices\CreateInvoiceForm.Designer.cs">
+      <DependentUpon>CreateInvoiceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Memos\CreateMemoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Memos\CreateMemoForm.Designer.cs">
+      <DependentUpon>CreateMemoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Products\AddProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Products\AddProductForm.Designer.cs">
+      <DependentUpon>AddProductForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Products\ProductDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Products\ProductDetailsForm.Designer.cs">
+      <DependentUpon>ProductDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Products\ProductsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Products\ProductsListForm.Designer.cs">
+      <DependentUpon>ProductsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Receipts\CreateReceiptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Receipts\CreateReceiptForm.Designer.cs">
+      <DependentUpon>CreateReceiptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Settings\Company\AddCompanyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Settings\Company\AddCompanyForm.Designer.cs">
+      <DependentUpon>AddCompanyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Settings\Currency\AddCurrencyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Settings\Currency\AddCurrencyForm.Designer.cs">
+      <DependentUpon>AddCurrencyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Settings\Tax\AddTaxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Settings\Tax\AddTaxForm.Designer.cs">
+      <DependentUpon>AddTaxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Stock\AddStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Stock\AddStockForm.Designer.cs">
+      <DependentUpon>AddStockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tenants\TenantCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tenants\TenantCreateForm.Designer.cs">
+      <DependentUpon>TenantCreateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tenants\TenantDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tenants\TenantDetailsForm.Designer.cs">
+      <DependentUpon>TenantDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\User\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\User\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\User\AddUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\User\AddUserForm.Designer.cs">
+      <DependentUpon>AddUserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\User\UsersListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\User\UsersListForm.Designer.cs">
+      <DependentUpon>UsersListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Voucher\CreateVoucherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Voucher\CreateVoucherForm.Designer.cs">
+      <DependentUpon>CreateVoucherForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Conversion.cs" />
+    <Compile Include="Helpers\Encryption.cs" />
+    <Compile Include="Helpers\EnumExtensions.cs" />
+    <Compile Include="Helpers\Globals.cs" />
+    <Compile Include="Helpers\Validator.cs" />
+    <Compile Include="Migrations\201709061415134_Initial.cs" />
+    <Compile Include="Migrations\201709061415134_Initial.Designer.cs">
+      <DependentUpon>201709061415134_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709061955532_AddedNameAndUnitsToProductModel.cs" />
+    <Compile Include="Migrations\201709061955532_AddedNameAndUnitsToProductModel.Designer.cs">
+      <DependentUpon>201709061955532_AddedNameAndUnitsToProductModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709071833484_ModifiedProductModel.cs" />
+    <Compile Include="Migrations\201709071833484_ModifiedProductModel.Designer.cs">
+      <DependentUpon>201709071833484_ModifiedProductModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709081750293_ModifiedTenantModel.cs" />
+    <Compile Include="Migrations\201709081750293_ModifiedTenantModel.Designer.cs">
+      <DependentUpon>201709081750293_ModifiedTenantModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709090543250_AddedUserIdToAllModels.cs" />
+    <Compile Include="Migrations\201709090543250_AddedUserIdToAllModels.Designer.cs">
+      <DependentUpon>201709090543250_AddedUserIdToAllModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709091738371_AddedCompanyModel.cs" />
+    <Compile Include="Migrations\201709091738371_AddedCompanyModel.Designer.cs">
+      <DependentUpon>201709091738371_AddedCompanyModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709100550236_UpdatedAccountModel.cs" />
+    <Compile Include="Migrations\201709100550236_UpdatedAccountModel.Designer.cs">
+      <DependentUpon>201709100550236_UpdatedAccountModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709100721322_UpdatedCompanyModel.cs" />
+    <Compile Include="Migrations\201709100721322_UpdatedCompanyModel.Designer.cs">
+      <DependentUpon>201709100721322_UpdatedCompanyModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709100738362_ModifiedInvoiceModel.cs" />
+    <Compile Include="Migrations\201709100738362_ModifiedInvoiceModel.Designer.cs">
+      <DependentUpon>201709100738362_ModifiedInvoiceModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709100941062_AddedStockModel.cs" />
+    <Compile Include="Migrations\201709100941062_AddedStockModel.Designer.cs">
+      <DependentUpon>201709100941062_AddedStockModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709110452566_ModifiedReceiptMemoVoucherModels.cs" />
+    <Compile Include="Migrations\201709110452566_ModifiedReceiptMemoVoucherModels.Designer.cs">
+      <DependentUpon>201709110452566_ModifiedReceiptMemoVoucherModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Enums.cs" />
+    <Compile Include="Models\GeneralJournal.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\Memo.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Receipt.cs" />
+    <Compile Include="Models\Stock.cs" />
+    <Compile Include="Models\Tax.cs" />
+    <Compile Include="Models\Tenant.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Voucher.cs" />
+    <Compile Include="PointOfSaleContext.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AccessRightsViewModel.cs" />
+    <EmbeddedResource Include="Forms\Accounts\AddAccountForm.resx">
+      <DependentUpon>AddAccountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Invoices\CreateInvoiceForm.resx">
+      <DependentUpon>CreateInvoiceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Memos\CreateMemoForm.resx">
+      <DependentUpon>CreateMemoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Products\AddProductForm.resx">
+      <DependentUpon>AddProductForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Products\ProductDetailsForm.resx">
+      <DependentUpon>ProductDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Products\ProductsListForm.resx">
+      <DependentUpon>ProductsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Receipts\CreateReceiptForm.resx">
+      <DependentUpon>CreateReceiptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Settings\Company\AddCompanyForm.resx">
+      <DependentUpon>AddCompanyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Settings\Currency\AddCurrencyForm.resx">
+      <DependentUpon>AddCurrencyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Settings\Tax\AddTaxForm.resx">
+      <DependentUpon>AddTaxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Stock\AddStockForm.resx">
+      <DependentUpon>AddStockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tenants\TenantCreateForm.resx">
+      <DependentUpon>TenantCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\User\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\User\AddUserForm.resx">
+      <DependentUpon>AddUserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\User\UsersListForm.resx">
+      <DependentUpon>UsersListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Voucher\CreateVoucherForm.resx">
+      <DependentUpon>CreateVoucherForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709061415134_Initial.resx">
+      <DependentUpon>201709061415134_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709061955532_AddedNameAndUnitsToProductModel.resx">
+      <DependentUpon>201709061955532_AddedNameAndUnitsToProductModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709071833484_ModifiedProductModel.resx">
+      <DependentUpon>201709071833484_ModifiedProductModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709081750293_ModifiedTenantModel.resx">
+      <DependentUpon>201709081750293_ModifiedTenantModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709090543250_AddedUserIdToAllModels.resx">
+      <DependentUpon>201709090543250_AddedUserIdToAllModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709091738371_AddedCompanyModel.resx">
+      <DependentUpon>201709091738371_AddedCompanyModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709100550236_UpdatedAccountModel.resx">
+      <DependentUpon>201709100550236_UpdatedAccountModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709100721322_UpdatedCompanyModel.resx">
+      <DependentUpon>201709100721322_UpdatedCompanyModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709100738362_ModifiedInvoiceModel.resx">
+      <DependentUpon>201709100738362_ModifiedInvoiceModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709100941062_AddedStockModel.resx">
+      <DependentUpon>201709100941062_AddedStockModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709110452566_ModifiedReceiptMemoVoucherModels.resx">
+      <DependentUpon>201709110452566_ModifiedReceiptMemoVoucherModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
