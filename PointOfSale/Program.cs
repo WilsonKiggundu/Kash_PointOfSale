@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.Entity;
 using PointOfSale.Forms;
-using PointOfSale.Forms.Accounts;
-using PointOfSale.Forms.Invoices;
-using PointOfSale.Forms.Products;
-using PointOfSale.Forms.Settings.Company;
-using PointOfSale.Forms.Settings.Currency;
-using PointOfSale.Forms.Settings.Tax;
+using PointOfSale.Forms.Stock;
 using PointOfSale.Forms.Tenants;
 using PointOfSale.Forms.User;
+using PointOfSale.Models;
 
 namespace PointOfSale
 {
@@ -47,7 +41,7 @@ namespace PointOfSale
                 }
                 else
                 {
-                    Application.Run(new TenantCreateForm());
+                    Application.Run(new RequestCredentials("tenant", SyncAction.Download));
                 }
             }
         }

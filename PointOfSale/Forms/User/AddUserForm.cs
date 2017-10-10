@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PointOfSale.Helpers;
 using PointOfSale.Models;
@@ -27,9 +23,12 @@ namespace PointOfSale.Forms.User
         {
             var tenants = _db.Tenants.OrderBy(q => q.Name).Select(s => new
             {
-                Id = s.Id,
-                Name = s.Name
+                s.Id,
+                s.Name
             }).ToList();
+
+            // tenants.Insert(0, new {Id = 0, Name = "--Select Tenant--"});
+
             cbTenant.DataSource = tenants;
             cbTenant.DisplayMember = "Name";
             cbTenant.ValueMember = "Id";
@@ -71,7 +70,6 @@ namespace PointOfSale.Forms.User
 
                     MessageBox.Show("Passwords don't match", "Password Mismatch", MessageBoxButtons.OK,
                         MessageBoxIcon.Stop);
-                    return;
                 }
                 else
                 {
@@ -194,6 +192,11 @@ namespace PointOfSale.Forms.User
             }
 
             errorProvider.SetError(tbPassword, "");
+        }
+
+        private void tpDetails_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

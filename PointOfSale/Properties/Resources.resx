@@ -153,4 +153,76 @@
   <data name="Memos" xml:space="preserve">
     <value>Memos</value>
   </data>
+  <data name="ConnectionError" xml:space="preserve">
+    <value>Connection Failed. Please ensure that you have internet access on this computer.</value>
+  </data>
+  <data name="FetchDataError" xml:space="preserve">
+    <value>Unable to fetch data at this time. Please try again later</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="NetworkAccess" xml:space="preserve">
+    <value>Network Access</value>
+  </data>
+  <data name="Provide_Username" xml:space="preserve">
+    <value>Please provide your email address</value>
+  </data>
+  <data name="Provide_Password" xml:space="preserve">
+    <value>Please provide your password</value>
+  </data>
+  <data name="AuthError" xml:space="preserve">
+    <value>Authentication Error</value>
+  </data>
+  <data name="InvoicesDownloadedSuccessfully" xml:space="preserve">
+    <value>All the invoices have been successfully uploaded</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="ReceiptsUploadedSuccessfully" xml:space="preserve">
+    <value>All the reciepts have been successfully uploaded</value>
+  </data>
+  <data name="VoucherUploadedSuccessfully" xml:space="preserve">
+    <value>All the vouchers have been successfully uploaded</value>
+  </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>You have provided invalid details. Please check them and try again</value>
+  </data>
+  <data name="AuthFailure" xml:space="preserve">
+    <value>Authentication Failure</value>
+  </data>
+  <data name="PorductsUpdated" xml:space="preserve">
+    <value>All the products list is now updated</value>
+  </data>
+  <data name="ProductsNotUpdated" xml:space="preserve">
+    <value>The products could not be updated right now</value>
+  </data>
+  <data name="CompaniesUpdated" xml:space="preserve">
+    <value>The companies have been updated</value>
+  </data>
+  <data name="CompaniesNotUpdated" xml:space="preserve">
+    <value>The companies could not be updated right now</value>
+  </data>
+  <data name="LocationsUpdated" xml:space="preserve">
+    <value>The locations have been updated</value>
+  </data>
+  <data name="LocationsNotUpdated" xml:space="preserve">
+    <value>The locatiocn could not be updated right now</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search...</value>
+  </data>
+  <data name="NoInvoiceItems" xml:space="preserve">
+    <value>The invoice can't be saved because there are no items</value>
+  </data>
+  <data name="Failure" xml:space="preserve">
+    <value>Failure</value>
+  </data>
+  <data name="NoReceiptItems" xml:space="preserve">
+    <value>The receipt can't be saved because there are no items</value>
+  </data>
+  <data name="ExcelDocuments" xml:space="preserve">
+    <value>Excel Documents (*.xls)|*.xlsx</value>
+  </data>
 </root>

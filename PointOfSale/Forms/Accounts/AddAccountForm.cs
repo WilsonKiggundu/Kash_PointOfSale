@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PointOfSale.Helpers;
 using PointOfSale.Models;
@@ -28,49 +22,49 @@ namespace PointOfSale.Forms.Accounts
         private void btnSave_Click(object sender, EventArgs e)
         {
             var name = tbName.Text;
-            var budget = tbBudget.Text;
-            var fees = tbFees.Text;
-            var currency = cbCurrency.SelectedValue;
-            var depreciation = tbDepreciation.Text;
+            var budget = cbBudget.Checked;
+            var fees = cbFees.Checked;
+            var currency = cbCurrency.SelectedValue.ToInteger();
+            var depreciation = tbDepreciation.Text.ToDecimal();
 
-            var parentAccount = cbParentAccount.SelectedValue;
-            var purchaseAccount = cbPurchaseAccount.SelectedValue;
-            var balanceSheetCategory = cbBalanceSheetCategory.SelectedValue;
-            var category = cbCategory.SelectedValue;
-            var cashflowCategory = cbCashflowCategory.SelectedValue;
+            var parentAccount = cbParentAccount.SelectedValue.ToInteger();
+            var balanceSheetCategory = cbBalanceSheetCategory.SelectedValue.GetEnumValue<BalanceSheetCategory>();
+            var category = cbCategory.SelectedValue.GetEnumValue<AccountCategory>();
+            var cashflowCategory = cbCashflowCategory.SelectedValue.GetEnumValue<CashflowCategory>();
 
             var account = new Account
             {
                 Name = name,
-                Budget = budget.ToDecimal(),
-                Fees = fees.ToDecimal(),
-                Depreciation = depreciation.ToDecimal(),
+                Budget = budget,
+                Fees = fees,
+                Depreciation = depreciation,
                 CurrencyId = currency.ToInteger(),
-                // BalanceSheetCategory = (BalanceSheetCategory)balanceSheetCategory,
-                // ParentAccountId = Convert.ToInt32(parentAccount),
-                // PurchaseAccountId = Convert.ToInt32(purchaseAccount),
-                // Category = (AccountCategory)category,
-                // CashflowCategory = (CashflowCategory)cashflowCategory
+                BalanceSheetCategory = balanceSheetCategory,
+                ParentAccountId = parentAccount > 0 ? parentAccount : null,
+                Category = category,
+                CashflowCategory = cashflowCategory
             };
 
             db.Accounts.Add(account);
             db.SaveChanges();
+
+            Close();
         }
 
         private void AddAccountForm_Load(object sender, EventArgs e)
         {
+            cbCategory.DataSource = Enum.GetValues(typeof(AccountCategory));
+
             var accounts = db.Accounts.OrderBy(d => d.Name)
                                 .Select(s => new
                                 {
                                     Id = s.Id,
                                     Name = s.Name
                                 }).ToList();
+            
+            accounts.Insert(0, new {Id = 0, Name = "-- Select Account --"});
 
-            cbPurchaseAccount.DataSource = accounts;
-            cbPurchaseAccount.DisplayMember = "Name";
-            cbPurchaseAccount.ValueMember = "Id";
-
-            cbParentAccount.DataSource = accounts;
+            cbParentAccount.DataSource = new BindingSource(accounts, null);
             cbParentAccount.DisplayMember = "Name";
             cbParentAccount.ValueMember = "Id";
 
@@ -78,8 +72,11 @@ namespace PointOfSale.Forms.Accounts
                                 .Select(s => new
                                 {
                                     Id = s.Id,
-                                    Name = s.Name
+                                    Name = s.Code
                                 }).ToList();
+
+            currencies.Insert(0, new { Id = 0, Name = "-- Select Currency --" });
+
             cbCurrency.DataSource = currencies;
             cbCurrency.DisplayMember = "Name";
             cbCurrency.ValueMember = "Id";

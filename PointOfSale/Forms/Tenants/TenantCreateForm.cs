@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using PointOfSale.Helpers;
 using PointOfSale.Models;
 
 namespace PointOfSale.Forms.Tenants
@@ -49,7 +43,7 @@ namespace PointOfSale.Forms.Tenants
                 LastPaymentDate = date,
                 Telephone = telephone,
                 Email = email,
-                Category = (TenantCategory)category
+                Category = category.GetEnumValue<TenantCategory>()
             };
 
             db.Tenants.Add(tenant);
@@ -58,7 +52,8 @@ namespace PointOfSale.Forms.Tenants
 
         private void TenantCreateForm_Load(object sender, EventArgs e)
         {
-            cbCategory.DataSource = Enum.GetValues(typeof(TenantCategory));
+            var categories = Enum.GetValues(typeof(TenantCategory));
+            cbCategory.DataSource = categories;
         }
     }
 }

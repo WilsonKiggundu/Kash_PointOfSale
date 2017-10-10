@@ -61,6 +61,24 @@ namespace PointOfSale.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authentication Error.
+        /// </summary>
+        internal static string AuthError {
+            get {
+                return ResourceManager.GetString("AuthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authentication Failure.
+        /// </summary>
+        internal static string AuthFailure {
+            get {
+                return ResourceManager.GetString("AuthFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp; Cancel.
         /// </summary>
         internal static string Cancel {
@@ -79,11 +97,83 @@ namespace PointOfSale.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The companies could not be updated right now.
+        /// </summary>
+        internal static string CompaniesNotUpdated {
+            get {
+                return ResourceManager.GetString("CompaniesNotUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The companies have been updated.
+        /// </summary>
+        internal static string CompaniesUpdated {
+            get {
+                return ResourceManager.GetString("CompaniesUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection Failed. Please ensure that you have internet access on this computer..
+        /// </summary>
+        internal static string ConnectionError {
+            get {
+                return ResourceManager.GetString("ConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excel Documents (*.xls)|*.xlsx.
+        /// </summary>
+        internal static string ExcelDocuments {
+            get {
+                return ResourceManager.GetString("ExcelDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failure.
+        /// </summary>
+        internal static string Failure {
+            get {
+                return ResourceManager.GetString("Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to fetch data at this time. Please try again later.
+        /// </summary>
+        internal static string FetchDataError {
+            get {
+                return ResourceManager.GetString("FetchDataError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Something went wrong performing the operation. Contact the systems administrator.
         /// </summary>
         internal static string InternalServerError {
             get {
                 return ResourceManager.GetString("InternalServerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have provided invalid details. Please check them and try again.
+        /// </summary>
+        internal static string InvalidCredentials {
+            get {
+                return ResourceManager.GetString("InvalidCredentials", resourceCulture);
             }
         }
         
@@ -106,11 +196,74 @@ namespace PointOfSale.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All the invoices have been successfully uploaded.
+        /// </summary>
+        internal static string InvoicesDownloadedSuccessfully {
+            get {
+                return ResourceManager.GetString("InvoicesDownloadedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The locatiocn could not be updated right now.
+        /// </summary>
+        internal static string LocationsNotUpdated {
+            get {
+                return ResourceManager.GetString("LocationsNotUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The locations have been updated.
+        /// </summary>
+        internal static string LocationsUpdated {
+            get {
+                return ResourceManager.GetString("LocationsUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Memos.
         /// </summary>
         internal static string Memos {
             get {
                 return ResourceManager.GetString("Memos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Network Access.
+        /// </summary>
+        internal static string NetworkAccess {
+            get {
+                return ResourceManager.GetString("NetworkAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The invoice can&apos;t be saved because there are no items.
+        /// </summary>
+        internal static string NoInvoiceItems {
+            get {
+                return ResourceManager.GetString("NoInvoiceItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The receipt can&apos;t be saved because there are no items.
+        /// </summary>
+        internal static string NoReceiptItems {
+            get {
+                return ResourceManager.GetString("NoReceiptItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All the products list is now updated.
+        /// </summary>
+        internal static string PorductsUpdated {
+            get {
+                return ResourceManager.GetString("PorductsUpdated", resourceCulture);
             }
         }
         
@@ -124,11 +277,47 @@ namespace PointOfSale.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The products could not be updated right now.
+        /// </summary>
+        internal static string ProductsNotUpdated {
+            get {
+                return ResourceManager.GetString("ProductsNotUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide your password.
+        /// </summary>
+        internal static string Provide_Password {
+            get {
+                return ResourceManager.GetString("Provide_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide your email address.
+        /// </summary>
+        internal static string Provide_Username {
+            get {
+                return ResourceManager.GetString("Provide_Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Receipts.
         /// </summary>
         internal static string Receipts {
             get {
                 return ResourceManager.GetString("Receipts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All the reciepts have been successfully uploaded.
+        /// </summary>
+        internal static string ReceiptsUploadedSuccessfully {
+            get {
+                return ResourceManager.GetString("ReceiptsUploadedSuccessfully", resourceCulture);
             }
         }
         
@@ -151,6 +340,24 @@ namespace PointOfSale.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search....
+        /// </summary>
+        internal static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ther user has been registered successfully. Do you want to add another one?.
         /// </summary>
         internal static string UserReg_SuccessMessage {
@@ -165,6 +372,15 @@ namespace PointOfSale.Properties {
         internal static string Vouchers {
             get {
                 return ResourceManager.GetString("Vouchers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All the vouchers have been successfully uploaded.
+        /// </summary>
+        internal static string VoucherUploadedSuccessfully {
+            get {
+                return ResourceManager.GetString("VoucherUploadedSuccessfully", resourceCulture);
             }
         }
     }

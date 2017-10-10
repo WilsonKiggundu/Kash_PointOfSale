@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using MySql.Data.Entity;
 using PointOfSale.Models;
 
@@ -26,6 +21,8 @@ namespace PointOfSale
         {
             Configuration.LazyLoadingEnabled = true;
 
+            modelBuilder.Entity<Currency>().Property(x => x.Rate).HasPrecision(18, 6);
+
             modelBuilder.Entity<Account>()
                 .HasOptional(e => e.ParentAccount)
                 .WithMany()
@@ -35,10 +32,6 @@ namespace PointOfSale
                 .HasOptional(e => e.PurchaseAccount)
                 .WithMany()
                 .HasForeignKey(m => m.PurchaseAccountId);
-
-            modelBuilder.Entity<Stock>()
-                .HasRequired(q => q.Product)
-                .WithOptional(q => q.Stock);
         }
 
         public DbSet<Account> Accounts { get; set; }
@@ -56,6 +49,8 @@ namespace PointOfSale
         public DbSet<UserAccessRight> UserAccessRights { get; set; }
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<Company> Companies { get; set; }
-        public DbSet<Stock> Stock { get; set; } 
+        public DbSet<Stock> Stock { get; set; }
+        public DbSet<StockItem> StockItems { get; set; }    
+        public DbSet<Location> Locations { get; set; }
     }
 }

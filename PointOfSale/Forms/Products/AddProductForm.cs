@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PointOfSale.Helpers;
 using PointOfSale.Models;
+using PointOfSale.Properties;
 
 namespace PointOfSale.Forms.Products
 {
@@ -18,6 +13,22 @@ namespace PointOfSale.Forms.Products
         public AddProductForm()
         {
             InitializeComponent();
+
+            var accounts = context.Accounts.OrderBy(d => d.Name).Select(s => new
+            {
+                Id = s.Id,
+                Name = s.Name
+            }).ToList();
+
+            accounts.Insert(0, new {Id = 0, Name = "--Select Account--"});
+
+            cbSaleAccount.DataSource = new BindingSource(accounts, null);
+            cbSaleAccount.DisplayMember = "Name";
+            cbSaleAccount.ValueMember = "Id";
+
+            cbPurchaseAccount.DataSource = new BindingSource(accounts, null);
+            cbPurchaseAccount.DisplayMember = "Name";
+            cbPurchaseAccount.ValueMember = "Id";
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -38,10 +49,10 @@ namespace PointOfSale.Forms.Products
             var openingStock = tbOpeningStock.Text;
             var sale = cbSale.Checked;
             var purchase = cbPurchase.Checked;
-            var purchaseAccount = cbPurchaseAccount.SelectedValue;
-            var saleAccount = cbSaleAccount.SelectedValue;
-            
-            context.Products.Add(new Product
+            var purchaseAccount = cbPurchaseAccount.SelectedValue.ToInteger();
+            var saleAccount = cbSaleAccount.SelectedValue.ToInteger();
+
+            var product = new Product
             {
                 Name = name,
                 Barcode = barcode,
@@ -55,14 +66,35 @@ namespace PointOfSale.Forms.Products
                 Purchase = purchase,
                 PurchaseAccountId = purchaseAccount.ToInteger(),
                 SaleAccountId = saleAccount.ToInteger(),
-                Sale = sale,
-                Stock = new Models.Stock
-                {
-                    Count = openingStock.ToDecimal() ?? 0
-                }
-            });
+                Sale = sale
+            };
 
+            if (purchase && purchaseAccount < 1)
+            {
+                product.PurchaseAccount = new Account
+                {
+                    Category = AccountCategory.Expense,
+                    Name = $"{product.Name} (Purchase)",
+                    CashflowCategory = CashflowCategory.Operating,
+                    Budget = true
+                };
+            }
+
+            if (sale && saleAccount < 1)
+            {
+                product.SaleAccount = new Account
+                {
+                    Category = AccountCategory.Expense,
+                    Name = $"{product.Name} (Revenue)",
+                    CashflowCategory = CashflowCategory.Operating,
+                    Budget = true
+                };
+            }
+
+            context.Products.Add(product);
             context.SaveChanges();
+
+            Close();
         }
 
         private void AddProductForm_Load(object sender, EventArgs e)
@@ -72,36 +104,16 @@ namespace PointOfSale.Forms.Products
 
         private void cbPurchase_CheckedChanged(object sender, EventArgs e)
         {
-            cbPurchaseAccount.Enabled = ((CheckBox) sender).Checked;
-            if (cbPurchaseAccount.Enabled)
-            {
-                var accounts = context.Accounts.OrderBy(d => d.Name).Select(s => new
-                {
-                    Id = s.Id,
-                    Name = s.Name
-                }).ToList();
-
-                cbPurchaseAccount.DataSource = accounts;
-                cbPurchaseAccount.DisplayMember = "Name";
-                cbPurchaseAccount.ValueMember = "Id";
-            }
+           
         }
 
         private void cbSale_CheckedChanged(object sender, EventArgs e)
         {
-            cbSaleAccount.Enabled = ((CheckBox)sender).Checked;
-            if (cbSaleAccount.Enabled)
-            {
-                var accounts = context.Accounts.OrderBy(d => d.Name).Select(s => new
-                {
-                    Id = s.Id,
-                    Name = s.Name
-                }).ToList();
+            
+        }
 
-                cbSaleAccount.DataSource = accounts;
-                cbSaleAccount.DisplayMember = "Name";
-                cbSaleAccount.ValueMember = "Id";
-            }
+        private void cbPurchaseAccount_MouseClick(object sender, MouseEventArgs e)
+        {
 
         }
     }

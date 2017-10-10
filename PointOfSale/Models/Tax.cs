@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PointOfSale.Models
 {
@@ -10,5 +6,8 @@ namespace PointOfSale.Models
     {
         public string Name { get; set; }
         public decimal? Percentage { get; set; }
+
+        [NotMapped]
+        public string Display => $"{Name} ({Percentage} %)";
     }
 }

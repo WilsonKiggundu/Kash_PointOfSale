@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PointOfSale.Models
 {
@@ -25,7 +23,18 @@ namespace PointOfSale.Models
         public virtual Invoice Invoice { get; set; }
         public int? CompanyId { get; set; }
         public virtual Company Company { get; set; }
+        
+        public int? LocationId { get; set; }
+        public virtual Location Location { get; set; }
 
-        public virtual ICollection<GeneralJournal> Journals { get; set; }
+        public ICollection<GeneralJournal> Journals { get; set; }
+
+        [NotMapped]
+        public decimal? Amount { get; set; }
+
+        public Voucher()
+        {
+            if (Journals != null) Amount = Journals.Sum(q => q.Amount);
+        }
     }
 }

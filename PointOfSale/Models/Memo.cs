@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PointOfSale.Models
 {
@@ -25,6 +21,9 @@ namespace PointOfSale.Models
         public Invoice Invoice { get; set; }
         public int? CompanyId { get; set; }
         public Company Company { get; set; }
+
+        public int? LocationId { get; set; }
+        public virtual Location Location { get; set; }
 
         public virtual ICollection<GeneralJournal> Journals { get; set; }
     }

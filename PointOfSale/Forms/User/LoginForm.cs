@@ -11,6 +11,8 @@ namespace PointOfSale.Forms.User
         public LoginForm()
         {
             InitializeComponent();
+            tbUsername.Text = "administrator";
+            tbPassword.Text = "sw33th0m3";
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -33,7 +35,7 @@ namespace PointOfSale.Forms.User
                 using (var db = new PointOfSaleContext())
                 {
                     password = Encryption.GetMd5Hash(password);
-                    var user = db.TenantUsers.Include(q => q.User)
+                    var user = db.TenantUsers.Include(u => u.Tenant).Include(q => q.User)
                         .FirstOrDefault(q => q.User.Username == username && q.User.Password == password);
 
                     if (user == null)
@@ -43,10 +45,12 @@ namespace PointOfSale.Forms.User
                     }
                     else
                     {
-                        this.Hide();
+                        Hide();
 
                         Session.TenantId = user.TenantId;
                         Session.UserId = user.UserId;
+                        Session.FullName = user.User.FullName;
+                        Session.Tenant = user.Tenant;
 
                         // Open the main form
                         new MainForm().Show();
@@ -59,6 +63,14 @@ namespace PointOfSale.Forms.User
         private void LoginForm_Load(object sender, EventArgs e)
         {
             ActiveControl = tbUsername;
+        }
+
+        private void tbPassword_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin.PerformClick();
+            }
         }
     }
 }

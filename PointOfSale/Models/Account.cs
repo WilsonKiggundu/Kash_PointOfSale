@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PointOfSale.Models
+﻿namespace PointOfSale.Models
 {
     public class Currency : BaseModel
     {
@@ -16,9 +10,9 @@ namespace PointOfSale.Models
     public class Account : BaseModel
     {
         public string Name { get; set; }   
-        public decimal? Fees { get; set; }
+        public bool Fees { get; set; }
         public decimal? Depreciation { get; set; }
-        public decimal? Budget { get; set; }
+        public bool Budget { get; set; }
         public AccountCategory? Category { get; set; }
         public CashflowCategory? CashflowCategory { get; set; } 
         public BalanceSheetCategory? BalanceSheetCategory { get; set; }

@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PointOfSale.Models
 {
     public class Stock : BaseModel
     {
-        public virtual Product Product { get; set; }
-        public decimal Count { get; set; }  
+        public StockCategory Category { get; set; }
+        public int? SourceId { get; set; }
+        public int? DestinationId { get; set; }
+        public string Remarks { get; set; }
+        public virtual ICollection<StockItem> StockItems { get; set; }  
+
+        #region Navigation Properties
+        public virtual Location Source { get; set; }
+        public virtual Location Destination { get; set; }
+        #endregion
     }
 }

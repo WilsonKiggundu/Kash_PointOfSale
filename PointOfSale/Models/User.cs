@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PointOfSale.Models
 {
@@ -17,6 +14,12 @@ namespace PointOfSale.Models
         public string Password { get; set; }
         public DateTime? LastLoggedIn { get; set; }
         public virtual ICollection<UserAccessRight> UserAccessRights { get; set; }
+
+        [NotMapped]
+        public string FullName
+        {
+            get { return $"{FirstName} {LastName}"; }
+        }
     }
 
     public class TenantUser

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using PointOfSale.Forms.Products;
+using PointOfSale.Forms.Settings.Locations;
 using PointOfSale.Helpers;
+using PointOfSale.Models;
+using PointOfSale.Properties;
 
 namespace PointOfSale.Forms.Stock
 {
@@ -18,65 +16,167 @@ namespace PointOfSale.Forms.Stock
         public AddStockForm()
         {
             InitializeComponent();
+
+            cbCategory.DataSource = Enum.GetValues(typeof(StockCategory));
+
+            for (var i = 0; i < gridView.ColumnCount; i++)
+            {
+                gridView.Columns[i].AutoSizeMode = i != 7
+                    ? DataGridViewAutoSizeColumnMode.DisplayedCells
+                    : DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+        }
+
+        private void LoadLocations()
+        {
+            var destLocations = _db.Locations.Where(q => !q.IsDeleted)
+                .Where(q => q.TenantId == Session.TenantId)
+                .Select(s => new { s.Id, s.Name }).ToList();
+
+            destLocations.Insert(0, new { Id = -1, Name = "Choose location" });
+            destLocations.Insert(1, new { Id = 0, Name = "+ Add New" });
+
+            cbDestination.DataSource = destLocations;
+            cbDestination.DisplayMember = "Name";
+            cbDestination.ValueMember = "Id";
+
+            var srcLocations = _db.Locations.Where(q => !q.IsDeleted)
+                .Where(q => q.TenantId == Session.TenantId)
+                .Select(s => new { s.Id, s.Name }).ToList();
+            srcLocations.Insert(0, new { Id = -1, Name = "Choose location" });
+            srcLocations.Insert(1, new { Id = 0, Name = "+ Add New" });
+
+            cbSource.DataSource = srcLocations;
+            cbSource.DisplayMember = "Name";
+            cbSource.ValueMember = "Id";
+        }
+
+        private void LoadProducts()
+        {
+            var products = _db.Products.Where(q => q.ProductType == ProductType.Stockable && !q.IsDeleted && q.TenantId == Session.TenantId)
+                .OrderBy(q => q.Name)
+                .Select(s => new { s.Id, s.Name })
+                .ToList();
+
+            products.Insert(0, new { Id = -1, Name = "Select Item" });
+            products.Insert(1, new { Id = 0, Name = "+ Add New" });
+
+            cbSearch.DataSource = products;
+            cbSearch.DisplayMember = "Name";
+            cbSearch.ValueMember = "Id";
         }
 
         private void AddStockForm_Load(object sender, EventArgs e)
         {
-            var products = _db.Products.Where(q => !q.IsDeleted && q.TenantId == Session.TenantId)
-                                .OrderBy(q => q.Name)
-                                .ToList();
-
-            cbProduct.DataSource = products;
-            cbProduct.DisplayMember = "Name";
-            cbProduct.ValueMember = "Id";
+            LoadProducts();
+            LoadLocations();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var productId = (int)cbProduct.SelectedValue;
-            var quantity = tbQuantity.Text;
-            var costPrice = tbCostPrice.Text;
-            var sellPrice = tbSellPrice.Text;
+            var sourceLocationId = cbSource.SelectedValue.ToInteger();
+            var destinationLocationId = cbDestination.SelectedValue.ToInteger();
+            var category = cbCategory.SelectedItem.GetEnumValue<StockCategory>();
+            var date = dpDate.Value;
 
-            var stock = _db.Stock.FirstOrDefault(q => q.Id == productId && q.TenantId == Session.TenantId);
-            if (stock != null)
+            if (sourceLocationId < 1) sourceLocationId = null;
+            if (destinationLocationId < 1) destinationLocationId = null;
+            
+            var stock = new Models.Stock
             {
-                stock.Count += quantity.ToDecimal() ?? 0;
-                _db.Entry(stock).State = EntityState.Modified;
-            }
-            else
+                SourceId = sourceLocationId,
+                DestinationId = destinationLocationId,
+                Category = category,
+                TenantId = Session.TenantId,
+                DateCreated = date,
+                Remarks = rtbRemarks.Text,
+                StockItems = new List<StockItem>()
+            };
+            
+            foreach (DataGridViewRow row in gridView.Rows)
             {
-                _db.Stock.Add(new Models.Stock
+                if(row.IsNewRow) continue;
+                stock.StockItems.Add(new StockItem
                 {
-                    Id = productId,
-                    Count = quantity.ToDecimal() ?? 0,
-                    TenantId = Session.TenantId
+                    Amount = row.Cells["Amount"].Value?.ToDecimal(),
+                    Quantity = row.Cells["Quantity"].Value?.ToDecimal(),
+                    DestinationLocationId = destinationLocationId,
+                    SourceLocationId = sourceLocationId,
+                    Category = category,
+                    Particulars = row.Cells["Particulars"].Value?.ToString(),
+                    ProductId = row.Cells["ProductId"].Value?.ToInteger(),
+                    BatchNo = row.Cells["BatchNo"].Value?.ToString(),
+                    ExpiryDate = row.Cells["ExpiryDate"].Value == null ? (DateTime?)null : Convert.ToDateTime(row.Cells["ExpiryDate"].Value),
+                    ManufactureDate = row.Cells["ManufactureDate"].Value == null ? (DateTime?)null : Convert.ToDateTime(row.Cells["ManufactureDate"].Value),
+                    DateCreated = date
                 });
             }
 
-            // update the product cost/sell price
-            var product = _db.Products.First(p => p.Id == productId);
-            product.CostPrice = costPrice.ToDecimal();
-            product.SellPrice = sellPrice.ToDecimal();
-            _db.Entry(product).State = EntityState.Modified;
-
-            _db.SaveChanges();
-        }
-
-        private void cbProduct_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            var id = cbProduct.SelectedValue.ToInteger();
-            if (id.HasValue)
+            _db.Stock.Add(stock);
+            try
             {
-                var product = _db.Products.First(q => q.Id == id);
-                tbSellPrice.Text = product.SellPrice.ToString();
-                tbCostPrice.Text = product.CostPrice.ToString();
+                _db.SaveChanges();
+                Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, Resources.Failure, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void cbCategory_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbSource_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            var sourceLocation = (int)cbSource.SelectedValue;
+            if (sourceLocation == 0)
+            {
+                new AddLocationForm().ShowDialog();
+            }
+        }
+
+        private void cbSearch_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            var productId = (int) cbSearch.SelectedValue;
+            if (productId == 0)
+            {
+                new AddProductForm().ShowDialog();
+            }
+            else
+            {
+                // Get product details
+                var product = _db.Products.FirstOrDefault(q => q.Id == productId);
+                if (product != null)
+                {
+                    // grid rows
+                    var i = gridView.RowCount;
+
+                    gridView.Rows.Add();
+
+                    var addedRowIndex = i - 1;
+                    gridView.Rows[addedRowIndex].Cells["ProductId"].Value = product.Id;
+                    gridView.Rows[addedRowIndex].Cells["Item"].Value = product.Name;
+                    gridView.Rows[addedRowIndex].Cells["Quantity"].Value = 1;
+                    gridView.Rows[addedRowIndex].Cells["Amount"].Value = product.CostPrice;
+
+                    gridView.CurrentCell = gridView.Rows[addedRowIndex].Cells["BatchNo"];
+                }
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadLocations();
+            LoadProducts();
         }
     }
 }

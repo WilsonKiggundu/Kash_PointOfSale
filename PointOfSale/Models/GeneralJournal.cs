@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PointOfSale.Models
+﻿namespace PointOfSale.Models
 {
     public class GeneralJournal : BaseModel
     {
@@ -13,7 +7,7 @@ namespace PointOfSale.Models
         public decimal? Amount { get; set; }
         public decimal? Rate { get; set; }
         public decimal? Quantity { get; set; }
-        public string Category { get; set; }
+        public JournalCategory Category { get; set; }
         public int? ProductId { get; set; }
         public virtual Product Product { get; set; }
         public int? CreditAccountId { get; set; }

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PointOfSale.Models
 {
     public class Receipt : BaseModel
     {
+        public int? InvoiceId { get; set; }
+        public virtual Invoice Invoice { get; set; }
         public ReceiptType Type { get; set; }
         public string Remarks { get; set; }
         public bool Paid { get; set; }
@@ -24,6 +24,17 @@ namespace PointOfSale.Models
         public int? CurrencyId { get; set; }
         public virtual Currency Currency { get; set; }
 
-        public virtual ICollection<GeneralJournal> Journals { get; set; }
+        public int? LocationId { get; set; }
+        public virtual Location Location { get; set; }  
+
+        public ICollection<GeneralJournal> Journals { get; set; }
+
+        [NotMapped]
+        public decimal? Amount { get; set; }
+
+        public Receipt()
+        {
+            if (Journals != null) Amount = Journals.Sum(q => q.Amount);
+        }
     }
 }

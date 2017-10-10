@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PointOfSale.Models
+﻿namespace PointOfSale.Models
 {
     public class Product : BaseModel
     {
@@ -21,9 +15,11 @@ namespace PointOfSale.Models
         public bool Sale { get; set; }
         public bool Purchase { get; set; }
         public int? SaleAccountId { get; set; }
-        public Account SaleAccount { get; set; }    
         public int? PurchaseAccountId { get; set; }
+
+        #region Navigation Properties
+        public Account SaleAccount { get; set; }
         public Account PurchaseAccount { get; set; }
-        public Stock Stock { get; set; }    
+        #endregion
     }
 }
